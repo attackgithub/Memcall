@@ -58,9 +58,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.naArg = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.CCBox = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.resultBox = new System.Windows.Forms.TextBox();
-            this.CCBox = new System.Windows.Forms.ComboBox();
             this.InvokeBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -139,6 +139,7 @@
             this.FuncAdr.Name = "FuncAdr";
             this.FuncAdr.Size = new System.Drawing.Size(165, 20);
             this.FuncAdr.TabIndex = 5;
+            this.FuncAdr.TextChanged += new System.EventHandler(this.FuncAdr_TextChanged_1);
             // 
             // groupBox2
             // 
@@ -381,6 +382,20 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Calling convention";
             // 
+            // CCBox
+            // 
+            this.CCBox.FormattingEnabled = true;
+            this.CCBox.Items.AddRange(new object[] {
+            "Cdecl",
+            "Fastcall",
+            "Stdcall",
+            "Thiscall"});
+            this.CCBox.Location = new System.Drawing.Point(6, 19);
+            this.CCBox.Name = "CCBox";
+            this.CCBox.Size = new System.Drawing.Size(151, 21);
+            this.CCBox.TabIndex = 0;
+            this.CCBox.Text = "Cdecl";
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
@@ -403,20 +418,6 @@
             this.resultBox.Size = new System.Drawing.Size(299, 75);
             this.resultBox.TabIndex = 9;
             this.resultBox.Text = "Memcall by Dz3n";
-            // 
-            // CCBox
-            // 
-            this.CCBox.FormattingEnabled = true;
-            this.CCBox.Items.AddRange(new object[] {
-            "Cdecl",
-            "Fastcall",
-            "Stdcall",
-            "Thiscall"});
-            this.CCBox.Location = new System.Drawing.Point(6, 19);
-            this.CCBox.Name = "CCBox";
-            this.CCBox.Size = new System.Drawing.Size(151, 21);
-            this.CCBox.TabIndex = 0;
-            this.CCBox.Text = "Cdecl";
             // 
             // InvokeBtn
             // 

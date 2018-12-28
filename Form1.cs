@@ -31,7 +31,7 @@ namespace Memcall
             }
             catch { }
             Version v = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            this.Text = String.Format("Memcall by Dz3n [v{0} x86]", v.ToString());
+            this.Text = String.Format("Memcall by Dz3n [v1.1.0.0 x86]");
         }
 
         private void InvokeBtn_Click(object sender, EventArgs e)
@@ -314,7 +314,7 @@ namespace Memcall
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ProcList plist = new ProcList();
+            ProcList plist = new ProcList(null);
             plist.ShowDialog();
             procBox.Text = plist.proc;
         }
@@ -367,6 +367,10 @@ namespace Memcall
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void FuncAdr_TextChanged_1(object sender, EventArgs e)
+        {
         }
     }
 }

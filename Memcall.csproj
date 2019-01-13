@@ -93,12 +93,6 @@
     <Compile Include="ArgumentInfo.cs" />
     <Compile Include="ESChecker.cs" />
     <Compile Include="FileAssociation.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Aero.cs" />
     <Compile Include="MemcallWnd.cs">
       <SubType>Form</SubType>
@@ -117,9 +111,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AboutWnd.resx">
       <DependentUpon>AboutWnd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemcallWnd.resx">
       <DependentUpon>MemcallWnd.cs</DependentUpon>
@@ -163,6 +154,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="escript.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\baseline_folder_open_black_18dp.png" />
+    <Content Include="Resources\baseline_save_black_18dp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

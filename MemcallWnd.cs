@@ -33,7 +33,7 @@ namespace Memcall
         public IntPtr Address = IntPtr.Zero;
         private int sItem = -1;
         public List<dynamic> Arguments = new List<dynamic>();
-        Type[] CompatibleTypes = { typeof(Nullable), typeof(string), typeof(int), typeof(byte), typeof(long), typeof(bool), typeof(float), typeof(double) };
+        Type[] CompatibleTypes = { typeof(Nullable), typeof(string), typeof(int), typeof(byte), typeof(long), typeof(bool), typeof(float), typeof(double), typeof(uint), typeof(ulong) };
         public bool WaitForProcess = false;
         public bool WaitingForProcess = false;
         public List<string> LastAddresses = new List<string>();
@@ -75,7 +75,6 @@ namespace Memcall
             {
                 LastAddresses.Clear();
                 sProcess = value;
-                labelInformation.Text = "";
                 if (sProcess != null)
                 {
                     btnProcess.Text = $"[{value.Id}] {value.ProcessName}";
@@ -103,14 +102,14 @@ namespace Memcall
             escript.API.WriteEvent += API_WriteEvent;
             escript.API.WriteLineEvent += API_WriteLineEvent;
             escript.API.Start();
-
+            
             Cmd.Process("PrintIntro");
             Cmd.Process("echo ESCRIPT {ver} connected to Memcall!");
 
 
-            foreach(var type in CompatibleTypes)
+            foreach (var type in CompatibleTypes)
             {
-                cbReturn.Items.Add(type.Name);
+                //cbReturn.Items.Add(type.Name);
                 cbArgType.Items.Add(type.Name);
             }
             try
@@ -237,14 +236,14 @@ namespace Memcall
 
         private void MemcallWnd_Deactivate(object sender, EventArgs e)
         {
-            if(!Program.DoAero(this, panel1))
-                panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            if (!Program.DoAero(this, panel1))
+                panel1.BackColor = Color.White;//System.Drawing.SystemColors.GradientInactiveCaption;
         }
 
         private void MemcallWnd_Activated(object sender, EventArgs e)
         {
             if (!Program.DoAero(this, panel1))
-                panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+                panel1.BackColor = Color.White; //System.Drawing.SystemColors.GradientActiveCaption;
         }
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
@@ -254,6 +253,26 @@ namespace Memcall
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
+        }
+
+        public bool IsItInHex(string n)
+        {
+            if (n.StartsWith("0x") || n.Any(char.IsLetter))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public string HexProc(string n)
+        {
+            n = n.Trim();
+
+            if (n.StartsWith("0x"))
+                n = n.Substring(2);
+
+            return n;
         }
 
         private void labelTitle_Click(object sender, EventArgs e)
@@ -271,7 +290,7 @@ namespace Memcall
             new Thread(CheckProcess).Start();
 
             Program.DoAero(this, panel1);
-
+            
             if (ProjectPath != null)
                 LoadProject(ProjectPath);
         }
@@ -291,16 +310,16 @@ namespace Memcall
                 if (n.Contains("/")) n = n.Split('/')[0];
                 n = n.Trim();
 
-                long v = 0;
+                uint v = 0;
 
                 try
                 {
-                    v = long.Parse(n, System.Globalization.NumberStyles.HexNumber);
+                    v = uint.Parse(n, System.Globalization.NumberStyles.HexNumber);
                     Address = (IntPtr)v;
                 }
                 catch
                 {
-                    v = long.Parse(n);
+                    v = uint.Parse(n);
                     Address = (IntPtr)v;
                 }
 
@@ -325,52 +344,44 @@ namespace Memcall
                 Process.EnterDebugMode();
 
                 MemorySharp m = new MemorySharp(SelectedProcess);
-                string type = cbReturn.Text.ToLower();
 
                 if (cbActivateWindow.Checked)
                     m.Windows.MainWindow.Activate();
 
-                List<dynamic> args = Arguments.ToList<dynamic>();
+                List<dynamic> args = Arguments.ToList();
                 for(int i = 0; i < args.Count; i++)
                 {
                     if (args[i] == null)
                         args[i] = IntPtr.Zero;
                 }
 
-                if (cbReturn.Text.ToLower() == "null" || cbReturn.Text.ToLower() == "nullable" || cbReturn.Text.ToLower() == "nothing" || cbReturn.Text.Length <= 0)
-                    result = m[Address, IsRelative].Execute(CallingConvention, args.ToArray<dynamic>());
-                else
-                {
-                    if (type == typeof(string).Name.ToLower())
-                        result = m[Address, IsRelative].Execute<string>(CallingConvention, args.ToArray<dynamic>());
-                    else if (type == typeof(int).Name.ToLower())
-                        result = m[Address, IsRelative].Execute<int>(CallingConvention, args.ToArray<dynamic>());
-                    else if (type == typeof(long).Name.ToLower())
-                        result = m[Address, IsRelative].Execute<long>(CallingConvention, args.ToArray<dynamic>());
-                    else if (type == typeof(bool).Name.ToLower())
-                        result = m[Address, IsRelative].Execute<bool>(CallingConvention, args.ToArray<dynamic>());
-                    else if (type == typeof(float).Name.ToLower())
-                        result = m[Address, IsRelative].Execute<float>(CallingConvention, args.ToArray<dynamic>());
-                    else if (type == typeof(double).Name.ToLower())
-                        result = m[Address, IsRelative].Execute<double>(CallingConvention, args.ToArray<dynamic>());
-                }
+                result = m[Address, IsRelative].Execute(CallingConvention, args.ToArray<dynamic>());
 
 
                 string r = "";
-                if (result == null) r = "null";
-                else if (result.GetType() == typeof(string)) r = "\"" + result.ToString() + "\"";
+
+                if (result == null)
+                    r = "null";
+
+                else if (result.GetType() == typeof(string))
+                    r = "\"" + result.ToString() + "\"";
+
                 else
                 {
-                    r = result.ToString();
-                    if(cbReturnHex.Checked)
+                    r = $"({result.GetType().Name}) {result.ToString()}";
+                    if(cbReturnHex.Checked && result != null)
                     {
                         try
                         {
                             r += "\r\n > HEX: 0x" + result.ToString("X4");
                         }
-                        catch { }
+                        catch
+                        {
+                            r += $"\r\n > HEX: Can't convert {result.GetType().Name} to hex";
+                        }
                     }
                 }
+
                 WriteLine($" > RESULT: " + r, ConsoleColor.Green, true);
             }
             catch (Exception ex)
@@ -462,11 +473,17 @@ namespace Memcall
                 }
                 else if (type == "int" || type == "integer" || type == "int32")
                 {
-                    Arguments[SelectedItem] = int.Parse(value);
+                    if (IsItInHex(value))
+                        Arguments[SelectedItem] = int.Parse(HexProc(value), System.Globalization.NumberStyles.HexNumber);
+                    else
+                        Arguments[SelectedItem] = int.Parse(value);
                 }
                 else if (type == "long" || type == "int64")
                 {
-                    Arguments[SelectedItem] = long.Parse(value);
+                    if (IsItInHex(value))
+                        Arguments[SelectedItem] = long.Parse(HexProc(value), System.Globalization.NumberStyles.HexNumber);
+                    else
+                        Arguments[SelectedItem] = long.Parse(value);
                 }
                 else if (type == "boolean" || type == "bool")
                 {
@@ -482,7 +499,24 @@ namespace Memcall
                 }
                 else if (type == "byte")
                 {
-                    Arguments[SelectedItem] = byte.Parse(value);
+                    if (IsItInHex(value))
+                        Arguments[SelectedItem] = byte.Parse(HexProc(value), System.Globalization.NumberStyles.HexNumber);
+                    else
+                        Arguments[SelectedItem] = byte.Parse(value);
+                }
+                else if (type == "uint" || type == "uint32")
+                {
+                    if (IsItInHex(value))
+                        Arguments[SelectedItem] = uint.Parse(HexProc(value), System.Globalization.NumberStyles.HexNumber);
+                    else
+                        Arguments[SelectedItem] = uint.Parse(value);
+                }
+                else if (type == "ulong" || type == "uint64")
+                {
+                    if (IsItInHex(value))
+                        Arguments[SelectedItem] = ulong.Parse(HexProc(value), System.Globalization.NumberStyles.HexNumber);
+                    else
+                        Arguments[SelectedItem] = ulong.Parse(value);
                 }
                 else if (type == "null" || type == "nullable")
                 {
@@ -503,6 +537,12 @@ namespace Memcall
             string text = tbArgValue.Text;
             if (cbAutoType.Checked)
             {
+                if(text.StartsWith("0x"))
+                {
+                    cbArgType.Text = "uint";
+                    return;
+                }
+
                 if(text.Length == 0)
                 {
                     cbArgType.Text = "null";
@@ -590,9 +630,9 @@ namespace Memcall
 
         private void cbCC_TextChanged(object sender, EventArgs e)
         {
-            if (cbCC.Text.ToLower().StartsWith("Fastcall")) CallingConvention = CallingConventions.Fastcall;
-            else if (cbCC.Text.ToLower().StartsWith("Stdcall")) CallingConvention = CallingConventions.Stdcall;
-            else if (cbCC.Text.ToLower().StartsWith("Thiscall")) CallingConvention = CallingConventions.Thiscall;
+            if (cbCC.Text.ToLower().StartsWith("fastcall")) CallingConvention = CallingConventions.Fastcall;
+            else if (cbCC.Text.ToLower().StartsWith("stdcall")) CallingConvention = CallingConventions.Stdcall;
+            else if (cbCC.Text.ToLower().StartsWith("thiscall")) CallingConvention = CallingConventions.Thiscall;
             else if (cbCC.Text.ToLower().StartsWith("cdecl")) CallingConvention = CallingConventions.Cdecl;
         }
 
@@ -608,10 +648,14 @@ namespace Memcall
 
         public void btnOpen_Click(object sender, EventArgs e)
         {
-            string a = Cmd.Process("FileDialog Open EXE||*.exe|*.exe");
-            if(a != "null")
+            object a = Cmd.Process("FileDialog(\"Open EXE\", \"*.exe|*.exe\");");
+            string b = "";
+            if (a != null)
+                b = (string)a;
+
+            if(b != "null")
             {
-                FileInfo p = new FileInfo(a);
+                FileInfo p = new FileInfo(b);
                 Process start = new Process();
                 start.StartInfo.WorkingDirectory = p.Directory.FullName;
                 start.StartInfo.FileName = p.FullName;
@@ -640,8 +684,8 @@ namespace Memcall
 
         private void panelOld_Click(object sender, EventArgs e)
         {
-            Form1 form = new Form1(new string[] { });
-            form.Show();
+            //    Form1 form = new Form1(new string[] { });
+            //    form.Show();
         }
 
         public void LoadProject(string f)
@@ -722,7 +766,6 @@ namespace Memcall
                     Program.ShowError(ex.ToString(), "Save Project Error");
                 }
 
-
                 escript.Cmd.Process("HideStatus");
             }
             else return;
@@ -732,6 +775,16 @@ namespace Memcall
         {
             if (e.Button == MouseButtons.Right)
                 SelectedProcess = null;
+        }
+
+        private void btnOpenPicture_Click(object sender, EventArgs e)
+        {
+            btnOpen_Click(null, null);
+        }
+
+        private void btnSavePicture_Click(object sender, EventArgs e)
+        {
+            btnSaveArgs_Click(null, null);
         }
     }
 }

@@ -54,7 +54,6 @@ namespace Memcall
         
         static void Run(string[] args)
         {
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MemcallWnd(args));

@@ -30,9 +30,8 @@
         {
             this.btnProcess = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnSaveArgs = new System.Windows.Forms.Button();
-            this.panelOld = new System.Windows.Forms.Panel();
-            this.btnOpenArgs = new System.Windows.Forms.Button();
+            this.btnSavePicture = new System.Windows.Forms.PictureBox();
+            this.btnOpenPicture = new System.Windows.Forms.PictureBox();
             this.btnOpen = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -53,8 +52,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.labelInformation = new System.Windows.Forms.Label();
             this.cbReturnHex = new System.Windows.Forms.CheckBox();
-            this.cbReturn = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cbAddress = new System.Windows.Forms.ComboBox();
             this.cbIsRelative = new System.Windows.Forms.CheckBox();
@@ -66,6 +63,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnApplyProps = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSavePicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnOpenPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -89,14 +88,13 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.panel1.Controls.Add(this.btnSaveArgs);
-            this.panel1.Controls.Add(this.panelOld);
-            this.panel1.Controls.Add(this.btnOpenArgs);
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.btnSavePicture);
+            this.panel1.Controls.Add(this.btnOpenPicture);
             this.panel1.Controls.Add(this.btnOpen);
             this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.btnProcess);
             this.panel1.Controls.Add(this.pictureBox2);
+            this.panel1.Controls.Add(this.btnProcess);
             this.panel1.Controls.Add(this.labelTitle);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -105,35 +103,31 @@
             this.panel1.TabIndex = 2;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             // 
-            // btnSaveArgs
+            // btnSavePicture
             // 
-            this.btnSaveArgs.Location = new System.Drawing.Point(129, 12);
-            this.btnSaveArgs.Name = "btnSaveArgs";
-            this.btnSaveArgs.Size = new System.Drawing.Size(59, 23);
-            this.btnSaveArgs.TabIndex = 6;
-            this.btnSaveArgs.Text = "Save...";
-            this.btnSaveArgs.UseVisualStyleBackColor = true;
-            this.btnSaveArgs.Click += new System.EventHandler(this.btnSaveArgs_Click);
+            this.btnSavePicture.BackColor = System.Drawing.Color.Transparent;
+            this.btnSavePicture.BackgroundImage = global::Memcall.Properties.Resources.baseline_save_black_18dp;
+            this.btnSavePicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSavePicture.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSavePicture.Location = new System.Drawing.Point(96, 5);
+            this.btnSavePicture.Name = "btnSavePicture";
+            this.btnSavePicture.Size = new System.Drawing.Size(36, 36);
+            this.btnSavePicture.TabIndex = 10;
+            this.btnSavePicture.TabStop = false;
+            this.btnSavePicture.Click += new System.EventHandler(this.btnSavePicture_Click);
             // 
-            // panelOld
+            // btnOpenPicture
             // 
-            this.panelOld.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelOld.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelOld.Location = new System.Drawing.Point(372, 12);
-            this.panelOld.Name = "panelOld";
-            this.panelOld.Size = new System.Drawing.Size(46, 20);
-            this.panelOld.TabIndex = 16;
-            this.panelOld.Click += new System.EventHandler(this.panelOld_Click);
-            // 
-            // btnOpenArgs
-            // 
-            this.btnOpenArgs.Location = new System.Drawing.Point(62, 12);
-            this.btnOpenArgs.Name = "btnOpenArgs";
-            this.btnOpenArgs.Size = new System.Drawing.Size(67, 23);
-            this.btnOpenArgs.TabIndex = 5;
-            this.btnOpenArgs.Text = "Open";
-            this.btnOpenArgs.UseVisualStyleBackColor = true;
-            this.btnOpenArgs.Click += new System.EventHandler(this.btnOpenArgs_Click);
+            this.btnOpenPicture.BackColor = System.Drawing.Color.Transparent;
+            this.btnOpenPicture.BackgroundImage = global::Memcall.Properties.Resources.baseline_folder_open_black_18dp;
+            this.btnOpenPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnOpenPicture.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOpenPicture.Location = new System.Drawing.Point(54, 5);
+            this.btnOpenPicture.Name = "btnOpenPicture";
+            this.btnOpenPicture.Size = new System.Drawing.Size(36, 36);
+            this.btnOpenPicture.TabIndex = 9;
+            this.btnOpenPicture.TabStop = false;
+            this.btnOpenPicture.Click += new System.EventHandler(this.btnOpenPicture_Click);
             // 
             // btnOpen
             // 
@@ -163,9 +157,9 @@
             this.pictureBox2.BackgroundImage = global::Memcall.Properties.Resources.Logo;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 2);
+            this.pictureBox2.Location = new System.Drawing.Point(12, 5);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(44, 37);
+            this.pictureBox2.Size = new System.Drawing.Size(36, 36);
             this.pictureBox2.TabIndex = 5;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.labelTitle_Click);
@@ -174,17 +168,17 @@
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.labelTitle.Location = new System.Drawing.Point(187, 13);
+            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.labelTitle.Location = new System.Drawing.Point(138, 14);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(67, 20);
+            this.labelTitle.Size = new System.Drawing.Size(64, 18);
             this.labelTitle.TabIndex = 2;
             this.labelTitle.Text = "Memcall";
             this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.panel2.Controls.Add(this.cbActivateWindow);
             this.panel2.Controls.Add(this.panel5);
             this.panel2.Controls.Add(this.tbLog);
@@ -198,6 +192,7 @@
             // cbActivateWindow
             // 
             this.cbActivateWindow.AutoSize = true;
+            this.cbActivateWindow.ForeColor = System.Drawing.Color.White;
             this.cbActivateWindow.Location = new System.Drawing.Point(521, 64);
             this.cbActivateWindow.Name = "cbActivateWindow";
             this.cbActivateWindow.Size = new System.Drawing.Size(147, 17);
@@ -217,24 +212,31 @@
             // 
             // tbLog
             // 
+            this.tbLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.tbLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbLog.Font = new System.Drawing.Font("Consolas", 8.5F);
-            this.tbLog.Location = new System.Drawing.Point(12, 10);
+            this.tbLog.ForeColor = System.Drawing.Color.White;
+            this.tbLog.Location = new System.Drawing.Point(4, 3);
             this.tbLog.Multiline = true;
             this.tbLog.Name = "tbLog";
-            this.tbLog.Size = new System.Drawing.Size(475, 77);
+            this.tbLog.Size = new System.Drawing.Size(493, 93);
             this.tbLog.TabIndex = 1;
             this.tbLog.TextChanged += new System.EventHandler(this.tbLog_TextChanged);
             // 
             // btnInvoke
             // 
             this.btnInvoke.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInvoke.BackColor = System.Drawing.Color.Transparent;
+            this.btnInvoke.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnInvoke.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnInvoke.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+            this.btnInvoke.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnInvoke.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInvoke.ForeColor = System.Drawing.Color.White;
             this.btnInvoke.Location = new System.Drawing.Point(503, 22);
             this.btnInvoke.Name = "btnInvoke";
             this.btnInvoke.Size = new System.Drawing.Size(180, 39);
             this.btnInvoke.TabIndex = 0;
-            this.btnInvoke.Text = "I believe I can fly (invoke)";
+            this.btnInvoke.Text = "Invoke";
             this.btnInvoke.UseVisualStyleBackColor = false;
             this.btnInvoke.Click += new System.EventHandler(this.btnInvoke_Click);
             // 
@@ -326,8 +328,6 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.labelInformation);
             this.groupBox2.Controls.Add(this.cbReturnHex);
-            this.groupBox2.Controls.Add(this.cbReturn);
-            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.cbAddress);
             this.groupBox2.Controls.Add(this.cbIsRelative);
@@ -366,44 +366,27 @@
             // 
             // labelInformation
             // 
-            this.labelInformation.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.labelInformation.Location = new System.Drawing.Point(6, 197);
+            this.labelInformation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.labelInformation.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.labelInformation.Location = new System.Drawing.Point(3, 128);
             this.labelInformation.Name = "labelInformation";
-            this.labelInformation.Size = new System.Drawing.Size(170, 56);
+            this.labelInformation.Size = new System.Drawing.Size(173, 117);
             this.labelInformation.TabIndex = 13;
             this.labelInformation.Text = "Here will be information about process";
+            this.labelInformation.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // cbReturnHex
             // 
             this.cbReturnHex.AutoSize = true;
             this.cbReturnHex.Checked = true;
             this.cbReturnHex.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbReturnHex.Location = new System.Drawing.Point(9, 174);
+            this.cbReturnHex.Location = new System.Drawing.Point(125, 233);
             this.cbReturnHex.Name = "cbReturnHex";
-            this.cbReturnHex.Size = new System.Drawing.Size(113, 17);
+            this.cbReturnHex.Size = new System.Drawing.Size(48, 17);
             this.cbReturnHex.TabIndex = 12;
-            this.cbReturnHex.Text = "Also show it in hex";
+            this.cbReturnHex.Text = "HEX";
             this.cbReturnHex.UseVisualStyleBackColor = true;
-            // 
-            // cbReturn
-            // 
-            this.cbReturn.FormattingEnabled = true;
-            this.cbReturn.Items.AddRange(new object[] {
-            "Nothing"});
-            this.cbReturn.Location = new System.Drawing.Point(6, 150);
-            this.cbReturn.Name = "cbReturn";
-            this.cbReturn.Size = new System.Drawing.Size(170, 21);
-            this.cbReturn.TabIndex = 11;
-            this.cbReturn.Text = "Nothing";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 132);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 13);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Returnable value";
+            this.cbReturnHex.Visible = false;
             // 
             // label1
             // 
@@ -458,20 +441,17 @@
             // cbAutoType
             // 
             this.cbAutoType.AutoSize = true;
-            this.cbAutoType.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cbAutoType.Checked = true;
-            this.cbAutoType.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAutoType.Location = new System.Drawing.Point(160, 115);
+            this.cbAutoType.Location = new System.Drawing.Point(44, 21);
             this.cbAutoType.Name = "cbAutoType";
-            this.cbAutoType.Size = new System.Drawing.Size(71, 17);
+            this.cbAutoType.Size = new System.Drawing.Size(48, 17);
             this.cbAutoType.TabIndex = 15;
-            this.cbAutoType.Text = "Auto type";
+            this.cbAutoType.Text = "Auto";
             this.cbAutoType.UseVisualStyleBackColor = true;
             // 
             // cbArgType
             // 
             this.cbArgType.FormattingEnabled = true;
-            this.cbArgType.Location = new System.Drawing.Point(10, 38);
+            this.cbArgType.Location = new System.Drawing.Point(10, 40);
             this.cbArgType.Name = "cbArgType";
             this.cbArgType.Size = new System.Drawing.Size(221, 21);
             this.cbArgType.TabIndex = 14;
@@ -489,7 +469,7 @@
             // tbArgValue
             // 
             this.tbArgValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbArgValue.Location = new System.Drawing.Point(10, 92);
+            this.tbArgValue.Location = new System.Drawing.Point(10, 83);
             this.tbArgValue.Name = "tbArgValue";
             this.tbArgValue.Size = new System.Drawing.Size(221, 20);
             this.tbArgValue.TabIndex = 4;
@@ -498,7 +478,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 76);
+            this.label3.Location = new System.Drawing.Point(7, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 1;
@@ -506,9 +486,9 @@
             // 
             // btnApplyProps
             // 
-            this.btnApplyProps.Location = new System.Drawing.Point(133, 220);
+            this.btnApplyProps.Location = new System.Drawing.Point(109, 226);
             this.btnApplyProps.Name = "btnApplyProps";
-            this.btnApplyProps.Size = new System.Drawing.Size(98, 23);
+            this.btnApplyProps.Size = new System.Drawing.Size(120, 23);
             this.btnApplyProps.TabIndex = 0;
             this.btnApplyProps.Text = "Apply";
             this.btnApplyProps.UseVisualStyleBackColor = true;
@@ -535,6 +515,8 @@
             this.Load += new System.EventHandler(this.MemcallWnd_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSavePicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnOpenPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -560,8 +542,6 @@
         private System.Windows.Forms.ComboBox cbAddress;
         private System.Windows.Forms.CheckBox cbIsRelative;
         private System.Windows.Forms.CheckBox cbReturnHex;
-        private System.Windows.Forms.ComboBox cbReturn;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button4;
@@ -582,8 +562,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.CheckBox cbActivateWindow;
-        private System.Windows.Forms.Panel panelOld;
-        private System.Windows.Forms.Button btnSaveArgs;
-        private System.Windows.Forms.Button btnOpenArgs;
+        private System.Windows.Forms.PictureBox btnOpenPicture;
+        private System.Windows.Forms.PictureBox btnSavePicture;
     }
 }

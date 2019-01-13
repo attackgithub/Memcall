@@ -33,7 +33,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ColumnPID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnProcessName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnWindowText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cbWait = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -41,17 +49,9 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.labelTitle = new System.Windows.Forms.Label();
-            this.cbWait = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.ColumnPID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnProcessName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnWindowText = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -76,7 +76,7 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -103,7 +103,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.Control;
+            this.dataGridView1.GridColor = System.Drawing.Color.White;
             this.dataGridView1.Location = new System.Drawing.Point(0, 34);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -115,7 +115,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.Size = new System.Drawing.Size(659, 301);
+            this.dataGridView1.Size = new System.Drawing.Size(659, 302);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -123,9 +123,39 @@
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             this.dataGridView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDoubleClick);
             // 
+            // ColumnPID
+            // 
+            this.ColumnPID.HeaderText = "PID";
+            this.ColumnPID.Name = "ColumnPID";
+            // 
+            // ColumnProcessName
+            // 
+            this.ColumnProcessName.HeaderText = "Process Name";
+            this.ColumnProcessName.Name = "ColumnProcessName";
+            // 
+            // ColumnWindowText
+            // 
+            this.ColumnWindowText.HeaderText = "Window";
+            this.ColumnWindowText.Name = "ColumnWindowText";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "User";
+            this.Column2.Name = "Column2";
+            // 
+            // ColumnUser
+            // 
+            this.ColumnUser.HeaderText = "Modules";
+            this.ColumnUser.Name = "ColumnUser";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Start Time";
+            this.Column1.Name = "Column1";
+            // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.checkBox1);
             this.panel1.Controls.Add(this.cbWait);
             this.panel1.Controls.Add(this.button1);
@@ -134,10 +164,35 @@
             this.panel1.Controls.Add(this.btnOK);
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 333);
+            this.panel1.Location = new System.Drawing.Point(0, 334);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(659, 41);
             this.panel1.TabIndex = 2;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(93, 12);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(65, 17);
+            this.checkBox1.TabIndex = 8;
+            this.checkBox1.Text = "only x86";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // cbWait
+            // 
+            this.cbWait.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbWait.AutoSize = true;
+            this.cbWait.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cbWait.Checked = true;
+            this.cbWait.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbWait.Location = new System.Drawing.Point(191, 12);
+            this.cbWait.Name = "cbWait";
+            this.cbWait.Size = new System.Drawing.Size(214, 17);
+            this.cbWait.TabIndex = 7;
+            this.cbWait.Text = "If process terminated, wait for reopening";
+            this.cbWait.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -217,6 +272,16 @@
             this.panel2.Size = new System.Drawing.Size(659, 35);
             this.panel2.TabIndex = 5;
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(445, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Search";
+            // 
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -236,78 +301,13 @@
             this.labelTitle.TabIndex = 5;
             this.labelTitle.Text = "Choose something";
             // 
-            // cbWait
-            // 
-            this.cbWait.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbWait.AutoSize = true;
-            this.cbWait.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cbWait.Checked = true;
-            this.cbWait.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbWait.Location = new System.Drawing.Point(191, 12);
-            this.cbWait.Name = "cbWait";
-            this.cbWait.Size = new System.Drawing.Size(214, 17);
-            this.cbWait.TabIndex = 7;
-            this.cbWait.Text = "If process terminated, wait for reopening";
-            this.cbWait.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(445, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Search";
-            // 
-            // ColumnPID
-            // 
-            this.ColumnPID.HeaderText = "PID";
-            this.ColumnPID.Name = "ColumnPID";
-            // 
-            // ColumnProcessName
-            // 
-            this.ColumnProcessName.HeaderText = "Process Name";
-            this.ColumnProcessName.Name = "ColumnProcessName";
-            // 
-            // ColumnWindowText
-            // 
-            this.ColumnWindowText.HeaderText = "Window";
-            this.ColumnWindowText.Name = "ColumnWindowText";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "User";
-            this.Column2.Name = "Column2";
-            // 
-            // ColumnUser
-            // 
-            this.ColumnUser.HeaderText = "Modules";
-            this.ColumnUser.Name = "ColumnUser";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Start Time";
-            this.Column1.Name = "Column1";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(93, 12);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(65, 17);
-            this.checkBox1.TabIndex = 8;
-            this.checkBox1.Text = "only x86";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
             // ProcList
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(659, 374);
+            this.ClientSize = new System.Drawing.Size(659, 375);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);

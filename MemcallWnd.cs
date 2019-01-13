@@ -648,7 +648,7 @@ namespace Memcall
 
         public void btnOpen_Click(object sender, EventArgs e)
         {
-            object a = Cmd.Process("FileDialog(\"Open EXE\", \"*.exe|*.exe\");");
+            object a = Cmd.Process("FileDialog Open EXE||*.exe|*.exe");
             string b = "";
             if (a != null)
                 b = (string)a;
